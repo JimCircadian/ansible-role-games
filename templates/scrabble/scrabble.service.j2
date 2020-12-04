@@ -1,0 +1,13 @@
+[Unit]
+Description=Scrabble
+After=network.target
+
+[Service]
+Type=simple
+User={{ games_scrabble_user }}
+Group={{ games_group }}
+Restart=always
+ExecStart=/usr/bin/node {{ games_scrabble_dir }}/server.js -c {{ games_scrabble_home }}/config.json -d {{ games_scrabble_home }}/data.db
+
+[Install]
+WantedBy=multi-user.target

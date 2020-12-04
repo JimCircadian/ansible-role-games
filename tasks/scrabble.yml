@@ -1,0 +1,66 @@
+---
+- import_role:    name=geerlingguy.nodejs
+  vars:
+    nodejs_version: "12.x"
+
+- name:   Create scrabble install dir
+  file:
+    path:   "{{ games_scrabble_dir }}"
+    state:  directory
+    owner:  root
+    group:  root
+    mode:   0755
+
+- name:   Create scrabble user
+  user:
+    name:   "{{ games_scrabble_user }}"
+    shell:  "{{ games_shell }}"
+    home:   "{{ games_scrabble_home }}"
+    create_home:  yes
+    group:  "{{ games_group }}"
+    system:   yes
+
+- name:   Get the scrabble zip
+  get_url:
+    url:    "{{ games_scrabble_url }}"
+    dest:   "/tmp/scrabble.zip"
+  register: scrabble_downloaded
+
+# TODO: games_scrabble_chksum
+- name:   Unzip the scrabble zip
+  unarchive:
+    src:    "{{ scrabble_downloaded.dest }}"
+    dest:   "/tmp/"
+    remote_src: yes
+
+- name:   Move the contents to the install directory
+  shell:
+    cmd:      "mv /tmp/html-scrabble-master/* {{ games_scrabble_dir }}/"
+    creates:  "{{ games_scrabble_dir }}/config-default.json"
+
+- name:   Create the scrabble configuration file
+  template:
+    src:    scrabble/config.json.j2
+    dest:   "{{ games_scrabble_home }}/config.json"
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name:   Run the scrabble install
+  npm:
+    path: "{{ games_scrabble_dir }}"
+
+- name:   Create the scrabble systemd service
+  template:
+    src:    scrabble/scrabble.service.j2
+    dest:   "{{ games_scrabble_service }}"
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name: Enable and start scrabble service
+  systemd:
+    state:    restarted
+    daemon_reload: yes
+    name:     scrabble
+    enabled:  true

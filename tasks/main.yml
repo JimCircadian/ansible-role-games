@@ -1,0 +1,15 @@
+---
+- name:   Create games directory
+  file:
+    path:     "{{ item }}"
+    state:    directory
+    owner:    root
+    group:    root
+    mode:     0755
+  when:       "games_install|length > 0"
+  with_items:
+    - "{{ games_dir }}"
+    - "{{ games_homes }}"
+
+- include_tasks:  scrabble.yml
+  when:           "'scrabble' in games_install"

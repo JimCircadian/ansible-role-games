@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Jim Circadian
+  description: A role for deploying some web based games
+  company: Circadian Systems
+
+  issue_tracker_url: https://github.com/JimCircadian/ansible-role-games/issues
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  # https://galaxy.ansible.com/api/v1/platforms/
+  platforms:
+  - name: EL
+    versions:
+    - 7
+
+  galaxy_tags: []
+    # List tags for your role here, one per line. A tag is a keyword that describes
+    # and categorizes the role. Users find roles by searching for tags. Be sure to
+    # remove the '[]' above, if you add tags to this list.
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies: []

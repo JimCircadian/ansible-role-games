@@ -1,0 +1,26 @@
+---
+games_install:    []
+games_available:
+- scrabble
+- go
+
+games_dir:        /usr/local/games
+games_homes:      /var/games
+games_group:      games
+games_shell:      /sbin/nologin
+
+## Scrabble
+
+games_scrabble_url:   https://github.com/hanshuebner/html-scrabble/archive/master.zip
+# TODO: This would be worth having for releases, but not master
+games_scrabble_chksum: e21c56af6b8329ac749627c7593c27992cd09a1ae7c6e7cb3ecde55472e7c083
+games_scrabble_user:  scrabble
+games_scrabble_dir:   "{{ games_dir }}/{{ games_scrabble_user }}"
+games_scrabble_home:  "{{ games_homes }}/{{ games_scrabble_user }}"
+games_scrabble_service: /etc/systemd/system/scrabble.service
+games_scrabble_port:  9093
+games_scrabble_host:  localhost
+games_scrabble_mail_from:   "{{ ansible_host }}"
+games_scrabble_mail_host:   localhost
+
+## GNU Go / Web
