@@ -19,8 +19,10 @@ games_scrabble_dir:   "{{ games_dir }}/{{ games_scrabble_user }}"
 games_scrabble_home:  "{{ games_homes }}/{{ games_scrabble_user }}"
 games_scrabble_service: /etc/systemd/system/scrabble.service
 games_scrabble_port:  9093
-games_scrabble_host:  localhost
+games_scrabble_baseurl:  http://localhost
+games_scrabble_mail_enable:   false
 games_scrabble_mail_from:   "{{ ansible_host }}"
 games_scrabble_mail_host:   localhost
-
+games_scrabble_mail_port:   null
+games_scrabble_creds:   null
 ## GNU Go / Web

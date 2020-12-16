@@ -1,8 +1,19 @@
 {
-    "port": {{ games_scrabble_port }},
-    "baseUrl": "http://{{ games_scrabble_host }}:{{ games_scrabble_port }}/",
+    "port": {{ games_scrabble_port }}
+    {%- if games_scrabble_mail_enable -%},
+    "baseUrl": "{{ games_scrabble_baseurl }}",
     "mailSender": "Scrabble Server <scrabble@{{ games_scrabble_mail_from }}>",
     "mailTransportConfig": {
-        "host": "{{ games_scrabble_mail_host }}"
+        "host": "{{ games_scrabble_mail_host }}"{% if games_scrabble_mail_port %},
+        "port": {{ games_scrabble_mail_port }},
+        "secure":   false
+    {% endif -%}
     }
+    {%- endif -%}
+    {%- if games_scrabble_creds -%},
+    "gameListLogin": {
+        "username": "{{ games_scrabble_creds.username }}",
+        "password": "{{ games_scrabble_creds.password }}"
+    }
+{% endif -%}
 }
