@@ -64,3 +64,10 @@
     daemon_reload: yes
     name:     scrabble
     enabled:  true
+
+- name: Install useful utilities
+  package:
+    name:     "{{ item }}"
+    state:    installed
+  with_items:
+    - "{{ games_scrabble_utils }}"

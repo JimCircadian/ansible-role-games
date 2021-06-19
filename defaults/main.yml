@@ -25,4 +25,6 @@ games_scrabble_mail_from:   "{{ ansible_host }}"
 games_scrabble_mail_host:   localhost
 games_scrabble_mail_port:   null
 games_scrabble_creds:   null
+games_scrabble_utils:
+  - jq
 ## GNU Go / Web
